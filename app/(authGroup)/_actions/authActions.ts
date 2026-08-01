@@ -3,7 +3,8 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { API_BASE_URL } from "@/lib/config";
+
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || "https://rent-nest-backend.vercel.app";
 
 export type AuthState = {
     success?: boolean;
@@ -19,7 +20,7 @@ export const loginAction = async (redirectTo: string, prevState: AuthState, form
 
     const payload = { email, password };
     try {
-        const loginEndpoint = `${API_BASE_URL}/api/auth/login`;
+        const loginEndpoint = `${BACKEND_URL}/api/auth/login`;
         console.log(`[loginAction] Attempting login fetch to: ${loginEndpoint}`);
 
         const res = await fetch(loginEndpoint, {
@@ -106,7 +107,7 @@ export const registerAction = async (prevState: AuthState, formData: FormData): 
 
     const payload = { name, email, password, phone, role };
     try {
-        const registerEndpoint = `${API_BASE_URL}/api/auth/register`;
+        const registerEndpoint = `${BACKEND_URL}/api/auth/register`;
         console.log(`[registerAction] Attempting register fetch to: ${registerEndpoint}`);
 
         const res = await fetch(registerEndpoint, {
@@ -122,7 +123,7 @@ export const registerAction = async (prevState: AuthState, formData: FormData): 
 
         if (result.success) {
             // Auto login after registration
-            const loginRes = await fetch(`${API_BASE_URL}/api/auth/login`, {
+            const loginRes = await fetch(`${BACKEND_URL}/api/auth/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, password }),
