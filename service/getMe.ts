@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { API_BASE_URL } from "@/lib/config";
 
 export const getMe = async () => {
     try {
@@ -14,9 +15,7 @@ export const getMe = async () => {
             };
         }
 
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-
-        const res = await fetch(`${backendUrl}/api/auth/me`, {
+        const res = await fetch(`${API_BASE_URL}/api/auth/me`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 Cookie: `accessToken=${accessToken}`,

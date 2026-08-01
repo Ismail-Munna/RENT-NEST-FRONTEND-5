@@ -1,9 +1,9 @@
 import { NextResponse } from "next/server";
+import { API_BASE_URL } from "@/lib/config";
 
 export async function GET() {
     try {
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-        const res = await fetch(`${backendUrl}/api/categories`, {
+        const res = await fetch(`${API_BASE_URL}/api/categories`, {
             cache: "no-store",
         });
 

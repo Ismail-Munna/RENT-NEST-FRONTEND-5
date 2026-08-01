@@ -4,6 +4,7 @@ import { IProperty, IRentalRequest } from "@/lib/types";
 import { cookies } from "next/headers";
 import { Building, DollarSign, FileText, Home, Inbox } from "lucide-react";
 import Link from "next/link";
+import { API_BASE_URL } from "@/lib/config";
 import { AddPropertyModal } from "./_components/AddPropertyModal";
 import { LandlordPropertyActions } from "./_components/LandlordPropertyActions";
 import { LandlordRequestTable } from "./_components/LandlordRequestTable";
@@ -15,10 +16,8 @@ async function getLandlordData(): Promise<{ properties: IProperty[]; requests: I
 
         if (!accessToken) return { properties: [], requests: [] };
 
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-
         // Fetch landlord requests
-        const requestsRes = await fetch(`${backendUrl}/api/landlord/requests`, {
+        const requestsRes = await fetch(`${API_BASE_URL}/api/landlord/requests`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 Cookie: `accessToken=${accessToken}`,
@@ -27,7 +26,7 @@ async function getLandlordData(): Promise<{ properties: IProperty[]; requests: I
         });
 
         // Fetch landlord's own properties (authenticated endpoint)
-        const propertiesRes = await fetch(`${backendUrl}/api/landlord/properties`, {
+        const propertiesRes = await fetch(`${API_BASE_URL}/api/landlord/properties`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 Cookie: `accessToken=${accessToken}`,

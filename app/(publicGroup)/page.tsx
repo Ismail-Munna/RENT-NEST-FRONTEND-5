@@ -4,11 +4,11 @@ import { Input } from "@/components/ui/input";
 import { IProperty } from "@/lib/types";
 import { Building, MapPin, Search, Shield, Sparkles, CheckCircle2, Key } from "lucide-react";
 import Link from "next/link";
+import { API_BASE_URL } from "@/lib/config";
 
 async function getFeaturedProperties(): Promise<IProperty[]> {
     try {
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-        const res = await fetch(`${backendUrl}/api/properties`, {
+        const res = await fetch(`${API_BASE_URL}/api/properties`, {
             cache: "no-store",
         });
 

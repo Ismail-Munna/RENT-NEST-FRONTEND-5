@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { API_BASE_URL } from "@/lib/config";
 
 export async function POST(request: Request) {
     try {
@@ -14,9 +15,7 @@ export async function POST(request: Request) {
             );
         }
 
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-
-        const res = await fetch(`${backendUrl}/api/rentals`, {
+        const res = await fetch(`${API_BASE_URL}/api/rentals`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

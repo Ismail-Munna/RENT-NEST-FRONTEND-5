@@ -2,6 +2,7 @@
 
 import { jwtUtils } from "@/utils/jwt";
 import { cookies } from "next/headers";
+import { API_BASE_URL } from "@/lib/config";
 
 export const getNewAccessToken = async () => {
     const cookieStore = await cookies();
@@ -14,10 +15,8 @@ export const getNewAccessToken = async () => {
         };
     }
 
-    const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-
     try {
-        const res = await fetch(`${backendUrl}/api/auth/refresh-token`, {
+        const res = await fetch(`${API_BASE_URL}/api/auth/refresh-token`, {
             method: "POST",
             headers: {
                 Cookie: `refreshToken=${refreshToken}`,

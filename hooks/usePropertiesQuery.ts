@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { IProperty, ICategory } from "@/lib/types";
+import { API_BASE_URL } from "@/lib/config";
 
 export interface QueryFilters {
     search?: string;
@@ -50,8 +51,7 @@ export function usePropertiesQuery(filters: QueryFilters, debounceMs = 400) {
     // 2. Fetch categories helper (cached statically as they rarely change)
     const fetchCategories = async (): Promise<ICategory[]> => {
         try {
-            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-            const res = await fetch(`${backendUrl}/api/categories`);
+            const res = await fetch(`${API_BASE_URL}/api/categories`);
             if (!res.ok) return [];
             const json = await res.json();
             return Array.isArray(json?.data) ? json.data : [];
@@ -81,7 +81,6 @@ export function usePropertiesQuery(filters: QueryFilters, debounceMs = 400) {
         }));
 
         try {
-            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
             const query = new URLSearchParams();
 
             if (activeFilters.search) query.append("search", activeFilters.search);
@@ -109,7 +108,7 @@ export function usePropertiesQuery(filters: QueryFilters, debounceMs = 400) {
                 }
             }
 
-            const res = await fetch(`${backendUrl}/api/properties?${queryString}`, {
+            const res = await fetch(`${API_BASE_URL}/api/properties?${queryString}`, {
                 signal: controller.signal,
             });
 

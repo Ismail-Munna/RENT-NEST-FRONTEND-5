@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { API_BASE_URL } from "@/lib/config";
 
 async function getAccessToken(request: Request): Promise<string | null> {
     const cookieStore = await cookies();
@@ -35,9 +36,7 @@ export async function POST(request: Request) {
             );
         }
 
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-
-        const res = await fetch(`${backendUrl}/api/landlord/properties`, {
+        const res = await fetch(`${API_BASE_URL}/api/landlord/properties`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -70,10 +69,8 @@ export async function PATCH(request: Request) {
             );
         }
 
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
         const { requestId, status } = body;
-
-        const res = await fetch(`${backendUrl}/api/landlord/requests/${requestId}`, {
+        const res = await fetch(`${API_BASE_URL}/api/landlord/requests/${requestId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -115,9 +112,7 @@ export async function DELETE(request: Request) {
             );
         }
 
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-
-        const res = await fetch(`${backendUrl}/api/landlord/properties/${id}`, {
+        const res = await fetch(`${API_BASE_URL}/api/landlord/properties/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -159,9 +154,7 @@ export async function PUT(request: Request) {
             );
         }
 
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-
-        const res = await fetch(`${backendUrl}/api/landlord/properties/${id}`, {
+        const res = await fetch(`${API_BASE_URL}/api/landlord/properties/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",

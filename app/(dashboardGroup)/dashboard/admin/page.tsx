@@ -2,6 +2,7 @@ import { Card } from "@/components/ui/card";
 import { ICategory, IProperty, IRentalRequest, IUser } from "@/lib/types";
 import { cookies } from "next/headers";
 import { Building, FileText, Layers, Users } from "lucide-react";
+import { API_BASE_URL } from "@/lib/config";
 import { AdminCategoryManager } from "./_components/AdminCategoryManager";
 import { AdminDashboardTabs } from "./_components/AdminDashboardTabs";
 
@@ -19,24 +20,22 @@ async function getAdminData(): Promise<{
             return { users: [], properties: [], rentals: [], categories: [] };
         }
 
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-
-        const usersRes = await fetch(`${backendUrl}/api/admin/users`, {
+        const usersRes = await fetch(`${API_BASE_URL}/api/admin/users`, {
             headers: { Authorization: `Bearer ${accessToken}`, Cookie: `accessToken=${accessToken}` },
             cache: "no-store",
         });
 
-        const propertiesRes = await fetch(`${backendUrl}/api/admin/properties`, {
+        const propertiesRes = await fetch(`${API_BASE_URL}/api/admin/properties`, {
             headers: { Authorization: `Bearer ${accessToken}`, Cookie: `accessToken=${accessToken}` },
             cache: "no-store",
         });
 
-        const rentalsRes = await fetch(`${backendUrl}/api/admin/rentals`, {
+        const rentalsRes = await fetch(`${API_BASE_URL}/api/admin/rentals`, {
             headers: { Authorization: `Bearer ${accessToken}`, Cookie: `accessToken=${accessToken}` },
             cache: "no-store",
         });
 
-        const categoriesRes = await fetch(`${backendUrl}/api/categories`, {
+        const categoriesRes = await fetch(`${API_BASE_URL}/api/categories`, {
             cache: "no-store",
         });
 

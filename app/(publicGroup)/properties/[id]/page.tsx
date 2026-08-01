@@ -6,6 +6,7 @@ import { IProperty } from "@/lib/types";
 import { getMe } from "@/service/getMe";
 import { Bath, Bed, Building, CheckCircle2, MapPin, Maximize2 } from "lucide-react";
 import Link from "next/link";
+import { API_BASE_URL } from "@/lib/config";
 
 interface PropertyDetailsProps {
     params: Promise<{
@@ -15,8 +16,7 @@ interface PropertyDetailsProps {
 
 async function getPropertyDetail(id: string): Promise<IProperty | null> {
     try {
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-        const res = await fetch(`${backendUrl}/api/properties/${id}`, {
+        const res = await fetch(`${API_BASE_URL}/api/properties/${id}`, {
             cache: "no-store",
         });
 

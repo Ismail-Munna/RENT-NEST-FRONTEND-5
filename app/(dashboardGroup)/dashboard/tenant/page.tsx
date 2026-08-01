@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { IRentalRequest } from "@/lib/types";
 import { cookies } from "next/headers";
 import { Building, CheckCircle2, Clock, FileText, XCircle } from "lucide-react";
+import { API_BASE_URL } from "@/lib/config";
 import Link from "next/link";
 import { TenantCheckoutButton } from "./_components/TenantCheckoutButton";
 
@@ -14,8 +15,7 @@ async function getMyRentalRequests(): Promise<IRentalRequest[]> {
 
         if (!accessToken) return [];
 
-        const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
-        const res = await fetch(`${backendUrl}/api/rentals`, {
+        const res = await fetch(`${API_BASE_URL}/api/rentals`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 Cookie: `accessToken=${accessToken}`,
