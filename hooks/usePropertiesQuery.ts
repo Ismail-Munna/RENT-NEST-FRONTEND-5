@@ -50,7 +50,7 @@ export function usePropertiesQuery(filters: QueryFilters, debounceMs = 400) {
     // 2. Fetch categories helper (cached statically as they rarely change)
     const fetchCategories = async (): Promise<ICategory[]> => {
         try {
-            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:5000";
+            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
             const res = await fetch(`${backendUrl}/api/categories`);
             if (!res.ok) return [];
             const json = await res.json();
@@ -81,7 +81,7 @@ export function usePropertiesQuery(filters: QueryFilters, debounceMs = 400) {
         }));
 
         try {
-            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:5000";
+            const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
             const query = new URLSearchParams();
 
             if (activeFilters.search) query.append("search", activeFilters.search);

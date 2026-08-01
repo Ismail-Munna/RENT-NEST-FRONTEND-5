@@ -17,7 +17,8 @@ export const subscribePremium = async () => {
                 }
             }
     
-    const res = await fetch(`${process.env.BACKEND_API_URL}/api/subscription/checkout`, {
+    const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
+    const res = await fetch(`${backendUrl}/api/subscription/checkout`, {
             method : "POST",
             headers: {
                 // Authorization : accessToken as unknown as string,
