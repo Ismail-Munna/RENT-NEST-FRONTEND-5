@@ -17,7 +17,7 @@ export const loginAction = async (redirectTo: string, prevState: AuthState, form
     const password = formData.get("password");
 
     const payload = { email, password };
-    const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || "http://localhost:3000";
 
     try {
         const loginEndpoint = `${backendUrl}/api/auth/login`;
@@ -106,7 +106,7 @@ export const registerAction = async (prevState: AuthState, formData: FormData): 
     const role = formData.get("role") || "TENANT";
 
     const payload = { name, email, password, phone, role };
-    const backendUrl = process.env.BACKEND_API_URL || process.env.NEXT_PUBLIC_BACKEND_API_URL || "http://localhost:3000";
+    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_API_URL || process.env.BACKEND_API_URL || "http://localhost:3000";
 
     try {
         const registerEndpoint = `${backendUrl}/api/auth/register`;
