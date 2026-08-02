@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
     { label: "Home", href: "/", icon: Home },
@@ -83,11 +84,14 @@ export function Navbar({ user }: NavbarProps) {
                         })}
                     </div>
 
-                    {/* User Auth Section */}
-                    {user?.success && userInfo ? (
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <button className="flex items-center gap-2 p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none cursor-pointer">
+                    {/* User Auth Section & Theme Toggle */}
+                    <div className="flex items-center gap-2 md:gap-4">
+                        <ThemeToggle />
+                        
+                        {user?.success && userInfo ? (
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <button className="flex items-center gap-2 p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none cursor-pointer">
                                     <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm shadow">
                                         {userName?.[0]?.toUpperCase() ?? "U"}
                                     </div>
@@ -135,6 +139,7 @@ export function Navbar({ user }: NavbarProps) {
                             </Link>
                         </div>
                     )}
+                    </div>
                 </div>
             </div>
         </nav>
