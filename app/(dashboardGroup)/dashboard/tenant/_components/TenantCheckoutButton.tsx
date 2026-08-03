@@ -29,6 +29,8 @@ export function TenantCheckoutButton({ rentalRequestId, amount }: TenantCheckout
                     amount,
                     method: "CARD",
                     provider: "STRIPE",
+                    successUrl: `${window.location.origin}/payment/success`,
+                    cancelUrl: `${window.location.origin}/payment/cancel`,
                 }),
             });
 

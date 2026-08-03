@@ -18,9 +18,16 @@ export function PropertyCard({ property }: PropertyCardProps) {
     const fallbackImage = "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?q=80&w=1000&auto=format&fit=crop";
 
     const imagesList = Array.isArray(property?.images) ? property.images : [];
+    
+    const isValidImageSrc = (src: string) => {
+        if (!src) return false;
+        const trimmed = src.trim();
+        return trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.startsWith('/');
+    };
+
     const defaultImage =
-        imagesList.length > 0 && typeof imagesList[0] === "string" && imagesList[0].trim() !== ""
-            ? imagesList[0]
+        imagesList.length > 0 && typeof imagesList[0] === "string" && isValidImageSrc(imagesList[0])
+            ? imagesList[0].trim()
             : fallbackImage;
 
     const [imgSrc, setImgSrc] = useState(defaultImage);
