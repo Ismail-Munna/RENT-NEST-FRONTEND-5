@@ -31,6 +31,9 @@ export function TenantCheckoutButton({ rentalRequestId, amount }: TenantCheckout
                     provider: "STRIPE",
                     successUrl: `${window.location.origin}/payment/success`,
                     cancelUrl: `${window.location.origin}/payment/cancel`,
+                    success_url: `${window.location.origin}/payment/success`,
+                    cancel_url: `${window.location.origin}/payment/cancel`,
+                    frontendUrl: window.location.origin,
                 }),
             });
 
