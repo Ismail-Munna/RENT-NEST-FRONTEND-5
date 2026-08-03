@@ -37,16 +37,18 @@ export function usePropertiesQuery(filters: QueryFilters, debounceMs = 400) {
     const [debouncedFilters, setDebouncedFilters] = useState<QueryFilters>(filters);
     const abortControllerRef = useRef<AbortController | null>(null);
 
+    const filtersStr = JSON.stringify(filters);
+
     // 1. Debounce filters update
     useEffect(() => {
         const handler = setTimeout(() => {
-            setDebouncedFilters(filters);
+            setDebouncedFilters(JSON.parse(filtersStr));
         }, debounceMs);
 
         return () => {
             clearTimeout(handler);
         };
-    }, [filters, debounceMs]);
+    }, [filtersStr, debounceMs]);
 
     // 2. Fetch categories helper (cached statically as they rarely change)
     const fetchCategories = async (): Promise<ICategory[]> => {
@@ -176,8 +178,8 @@ export function usePropertiesQuery(filters: QueryFilters, debounceMs = 400) {
     }, [debouncedFilters, fetchProperties]);
 
     const refetch = useCallback(() => {
-        fetchProperties(filters, true);
-    }, [filters, fetchProperties]);
+        fetchProperties(JSON.parse(filtersStr), true);
+    }, [filtersStr, fetchProperties]);
 
     return {
         ...state,

@@ -5,7 +5,13 @@ import { cookies } from "next/headers";
 import { API_BASE_URL } from "@/lib/config";
 
 export const getNewAccessToken = async () => {
-    const cookieStore = await cookies();
+    let cookieStore;
+    try {
+        cookieStore = await cookies();
+    } catch (e: any) {
+        if (e.message?.includes("dynamic") || e.digest?.includes("DYNAMIC")) throw e;
+        return { success: false, message: "Cookies unavailable" };
+    }
     const refreshToken = cookieStore.get("refreshToken")?.value || null;
 
     if (!refreshToken) {
@@ -33,7 +39,13 @@ export const getNewAccessToken = async () => {
 };
 
 export const isAccessTokenExist = async () => {
-    const cookieStore = await cookies();
+    let cookieStore;
+    try {
+        cookieStore = await cookies();
+    } catch (e: any) {
+        if (e.message?.includes("dynamic") || e.digest?.includes("DYNAMIC")) throw e;
+        return null;
+    }
     let accessToken = cookieStore.get("accessToken")?.value || null;
     const refreshToken = cookieStore.get("refreshToken")?.value || null;
 

@@ -1,0 +1,16 @@
+[33md185149[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m error solved
+[33mc3ec8ac[m error sollve
+[33m6b4ee86[m footer added
+[33m0209a9f[m 404 added
+[33m57789f7[m loadin added
+[33m6e22f30[m landlord responsive
+[33m145161d[m tananent responsive done
+[33m87d51ca[m done responsive error
+[33mfba0c05[m responsive
+[33mb7d4e00[m added dark mode
+[33m2dfa2e3[m fix: use locally defined BACKEND_URL in authActions.ts to prevent Vercel action build bugs
+[33me00711e[m fix: refactor backend API URL calls to use centralized API_BASE_URL config with fallback
+[33m2339386[m fix: update correct backend auth API endpoints
+[33m86a457c[m fix: attach backend base URL to API fetch requests
+[33m0b177fe[m feat: add all frontend project files
+[33m07788b7[m feat: connect live backend URL and prepare for deployment

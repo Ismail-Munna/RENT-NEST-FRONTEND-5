@@ -10,7 +10,15 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
-  }
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_API_URL || 'https://rent-nest-backend.vercel.app'}/api/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

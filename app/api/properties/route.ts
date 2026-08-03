@@ -1,12 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { API_BASE_URL } from "@/lib/config";
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
+    // Accessing nextUrl.searchParams triggers a dynamic bailout during static generation.
+    // We must call it outside of try/catch so Next.js can intercept the bailout exception.
+    const searchParams = request.nextUrl.searchParams;
+    const res = await fetch(`${API_BASE_URL}/api/properties?${searchParams.toString()}`, {
+        cache: "no-store",
+    });
+
     try {
-        const { searchParams } = new URL(request.url);
-        const res = await fetch(`${API_BASE_URL}/api/properties?${searchParams.toString()}`, {
-            cache: "no-store",
-        });
 
         if (!res.ok) {
             return NextResponse.json({ success: false, data: [] }, { status: res.status });

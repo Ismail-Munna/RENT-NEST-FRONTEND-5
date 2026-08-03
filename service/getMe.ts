@@ -4,8 +4,20 @@ import { cookies } from "next/headers";
 import { API_BASE_URL } from "@/lib/config";
 
 export const getMe = async () => {
+    let cookieStore;
     try {
-        const cookieStore = await cookies();
+        cookieStore = await cookies();
+    } catch (error: any) {
+        if (error.message?.includes("dynamic") || error.digest?.includes("DYNAMIC")) {
+            throw error;
+        }
+        return {
+            success: false,
+            message: "Cookies unavailable",
+        };
+    }
+
+    try {
         const accessToken = cookieStore.get("accessToken")?.value || null;
 
         if (!accessToken) {

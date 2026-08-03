@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useActionState, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { registerAction } from "../_actions/authActions";
 import { User, Mail, Phone, KeyRound, ArrowRight, Loader2, Home, UserCheck } from "lucide-react";
@@ -14,12 +15,16 @@ const RegisterForm = () => {
     const [state, action, pending] = useActionState(registerAction, {});
     const [role, setRole] = useState<"TENANT" | "LANDLORD">("TENANT");
 
+    const router = useRouter();
+
     useEffect(() => {
         if (!state) return;
-        if (state.success === false && state.message) {
+        if (state.success && state.redirectUrl) {
+            router.push(state.redirectUrl);
+        } else if (state.success === false && state.message) {
             toast.error(state.message || "Registration failed.");
         }
-    }, [state]);
+    }, [state, router]);
 
     return (
         <Card className="p-6 shadow-xl border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md">

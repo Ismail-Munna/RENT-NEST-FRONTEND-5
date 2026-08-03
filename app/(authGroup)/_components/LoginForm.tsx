@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { toast } from "sonner";
 import { loginAction } from "../_actions/authActions";
@@ -16,9 +16,14 @@ const LoginForm = () => {
     const redirectTo = searchParams.get("redirectTo") ?? "";
     const [state, action, pending] = useActionState(loginAction.bind(null, redirectTo), {});
 
+    const router = useRouter();
+
     useEffect(() => {
         if (!state) return;
-        if (state.success === false && state.message) {
+        if (state.success && state.redirectUrl) {
+            router.push(state.redirectUrl);
+            router.refresh();
+        } else if (state.success === false && state.message) {
             toast.error(state.message || "Login failed. Please check your credentials.");
         }
     }, [state]);

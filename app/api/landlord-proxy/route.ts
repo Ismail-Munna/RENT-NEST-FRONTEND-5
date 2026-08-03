@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { API_BASE_URL } from "@/lib/config";
 
 async function getAccessToken(request: Request): Promise<string | null> {
@@ -91,9 +91,9 @@ export async function PATCH(request: Request) {
     }
 }
 
-export async function DELETE(request: Request) {
+export async function DELETE(request: NextRequest) {
     try {
-        const { searchParams } = new URL(request.url);
+        const searchParams = request.nextUrl.searchParams;
         const id = searchParams.get("id");
 
         if (!id) {
@@ -132,9 +132,9 @@ export async function DELETE(request: Request) {
     }
 }
 
-export async function PUT(request: Request) {
+export async function PUT(request: NextRequest) {
     try {
-        const { searchParams } = new URL(request.url);
+        const searchParams = request.nextUrl.searchParams;
         const id = searchParams.get("id");
 
         if (!id) {

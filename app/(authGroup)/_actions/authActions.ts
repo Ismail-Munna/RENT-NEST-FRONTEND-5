@@ -12,6 +12,7 @@ export type AuthState = {
     message?: string;
     data?: any;
     error?: string;
+    redirectUrl?: string;
 };
 
 export const loginAction = async (redirectTo: string, prevState: AuthState, formData: FormData): Promise<AuthState> => {
@@ -19,6 +20,9 @@ export const loginAction = async (redirectTo: string, prevState: AuthState, form
     const password = formData.get("password");
 
     const payload = { email, password };
+    let redirectUrl: string | null = null;
+    let authResult: any = null;
+
     try {
         const loginEndpoint = `${BACKEND_URL}/api/auth/login`;
         console.log(`[loginAction] Attempting login fetch to: ${loginEndpoint}`);
@@ -52,7 +56,13 @@ export const loginAction = async (redirectTo: string, prevState: AuthState, form
         const result = await res.json();
 
         if (result.success && result.data?.accessToken) {
-            const cookieStore = await cookies();
+            let cookieStore;
+            try {
+                cookieStore = await cookies();
+            } catch (e: any) {
+                if (e.message?.includes("dynamic") || e.digest?.includes("DYNAMIC")) throw e;
+                return { success: false, message: "Cookies unavailable" };
+            }
 
             cookieStore.set("accessToken", result.data.accessToken, {
                 httpOnly: true,
@@ -71,31 +81,36 @@ export const loginAction = async (redirectTo: string, prevState: AuthState, form
             const role = decodedToken?.role;
 
             if (redirectTo && typeof redirectTo === "string" && redirectTo.startsWith("/") && !redirectTo.startsWith("//")) {
-                redirect(redirectTo);
-            }
-
-            if (role === "TENANT") {
-                redirect("/dashboard/tenant");
+                redirectUrl = redirectTo;
+            } else if (role === "TENANT") {
+                redirectUrl = "/dashboard/tenant";
             } else if (role === "LANDLORD") {
-                redirect("/dashboard/landlord");
+                redirectUrl = "/dashboard/landlord";
             } else if (role === "ADMIN") {
-                redirect("/dashboard/admin");
+                redirectUrl = "/dashboard/admin";
             } else {
-                redirect("/");
+                redirectUrl = "/";
             }
+            authResult = result;
+        } else {
+            return result;
         }
-
-        return result;
     } catch (error: any) {
-        if (error?.digest?.startsWith("NEXT_REDIRECT")) {
-            throw error;
-        }
         console.error("[loginAction] Fetch execution error:", error);
         return {
             success: false,
-            message: error.message ? `Login failed: ${error.message}` : "Login request failed. Verify backend server is running on http://localhost:3000.",
+            message: error.message ? `Login failed: ${error.message}` : "Login request failed.",
         };
     }
+
+    if (redirectUrl) {
+        return {
+            ...authResult,
+            redirectUrl,
+        };
+    }
+    
+    return authResult;
 };
 
 export const registerAction = async (prevState: AuthState, formData: FormData): Promise<AuthState> => {
@@ -106,6 +121,9 @@ export const registerAction = async (prevState: AuthState, formData: FormData): 
     const role = formData.get("role") || "TENANT";
 
     const payload = { name, email, password, phone, role };
+    let redirectUrl: string | null = null;
+    let authResult: any = null;
+
     try {
         const registerEndpoint = `${BACKEND_URL}/api/auth/register`;
         console.log(`[registerAction] Attempting register fetch to: ${registerEndpoint}`);
@@ -132,7 +150,13 @@ export const registerAction = async (prevState: AuthState, formData: FormData): 
             const loginResult = await loginRes.json();
 
             if (loginResult.success && loginResult.data?.accessToken) {
-                const cookieStore = await cookies();
+                let cookieStore;
+                try {
+                    cookieStore = await cookies();
+                } catch (e: any) {
+                    if (e.message?.includes("dynamic") || e.digest?.includes("DYNAMIC")) throw e;
+                    return { success: false, message: "Cookies unavailable" };
+                }
                 cookieStore.set("accessToken", loginResult.data.accessToken, {
                     httpOnly: true,
                     path: "/",
@@ -141,24 +165,31 @@ export const registerAction = async (prevState: AuthState, formData: FormData): 
                 });
 
                 if (role === "LANDLORD") {
-                    redirect("/dashboard/landlord");
+                    redirectUrl = "/dashboard/landlord";
                 } else if (role === "ADMIN") {
-                    redirect("/dashboard/admin");
+                    redirectUrl = "/dashboard/admin";
                 } else {
-                    redirect("/dashboard/tenant");
+                    redirectUrl = "/dashboard/tenant";
                 }
             }
+            authResult = result;
+        } else {
+            return result;
         }
-
-        return result;
     } catch (error: any) {
-        if (error?.digest?.startsWith("NEXT_REDIRECT")) {
-            throw error;
-        }
         console.error("[registerAction] Fetch execution error:", error);
         return {
             success: false,
             message: error.message ? `Registration failed: ${error.message}` : "Registration request failed.",
         };
     }
+
+    if (redirectUrl) {
+        return {
+            ...authResult,
+            redirectUrl,
+        };
+    }
+
+    return authResult;
 };

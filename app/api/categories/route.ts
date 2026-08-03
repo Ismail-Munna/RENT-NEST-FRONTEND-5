@@ -2,10 +2,13 @@ import { NextResponse } from "next/server";
 import { API_BASE_URL } from "@/lib/config";
 
 export async function GET() {
+    // Calling fetch with cache: no-store triggers a dynamic bailout during static generation.
+    // We must call it outside of try/catch so Next.js can intercept the bailout exception.
+    const res = await fetch(`${API_BASE_URL}/api/categories`, {
+        cache: "no-store",
+    });
+
     try {
-        const res = await fetch(`${API_BASE_URL}/api/categories`, {
-            cache: "no-store",
-        });
 
         if (!res.ok) {
             return NextResponse.json({ success: false, data: [] }, { status: res.status });

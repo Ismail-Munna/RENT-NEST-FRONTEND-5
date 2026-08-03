@@ -19,6 +19,24 @@ const verifyToken = (token: string, secret: string) => {
 }
 
 
+const decodeToken = (token: string) => {
+    try {
+        const decodedToken = jwt.decode(token);
+        return {
+            success: !!decodedToken,
+            data: decodedToken
+        };
+    } catch (error: any) {
+        console.log("Token decoding failed:", error);
+        return {
+            success: false,
+            error: error.message
+        }
+    }
+}
+
+
 export const jwtUtils = {
-    verifyToken
+    verifyToken,
+    decodeToken
 }
