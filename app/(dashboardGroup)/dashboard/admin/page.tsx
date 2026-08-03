@@ -93,52 +93,52 @@ export default async function AdminDashboardPage() {
     const totalRentals = rentals.length;
 
     return (
-        <div className="p-6 md:p-8 space-y-8 bg-slate-50 dark:bg-slate-950 min-h-screen">
-            <div>
-                <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Admin Moderation Dashboard</h1>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
+        <div className="p-4 sm:p-6 md:p-8 space-y-8 bg-slate-50 dark:bg-slate-950 w-full max-w-full min-h-0 overflow-x-hidden">
+            <div className="w-full">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold break-words px-4 sm:px-6 text-slate-900 dark:text-white">Admin Moderation Dashboard</h1>
+                <p className="text-sm text-slate-500 dark:text-slate-400 px-4 sm:px-6 break-words">
                     Monitor global system stats, perform user ban/unban moderation, and manage categories.
                 </p>
             </div>
 
             {/* Global Stats Overview */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-4">
                     <div className="p-3 rounded-xl bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400">
                         <Users className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">Registered Users</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">Registered Users</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{totalUsers}</h3>
                     </div>
                 </Card>
 
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-4">
                     <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400">
                         <Building className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">Global Listings</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">Global Listings</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{totalProperties}</h3>
                     </div>
                 </Card>
 
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-4">
                     <div className="p-3 rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
                         <FileText className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">Rental Applications</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">Rental Applications</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{totalRentals}</h3>
                     </div>
                 </Card>
 
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-4">
                     <div className="p-3 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
                         <Layers className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">Categories</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">Categories</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{categories.length}</h3>
                     </div>
                 </Card>

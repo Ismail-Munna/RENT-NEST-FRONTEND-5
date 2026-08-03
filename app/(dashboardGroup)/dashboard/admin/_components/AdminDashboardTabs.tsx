@@ -100,8 +100,8 @@ export function AdminDashboardTabs({ users, properties, rentals }: AdminDashboar
                         </div>
                     ) : (
                         <div className="overflow-x-auto w-full">
-                            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400 min-w-[700px]">
-                                <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800">
+                            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400 block md:table">
+                                <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800 hidden md:table-header-group">
                                     <tr>
                                         <th className="p-4">Title</th>
                                         <th className="p-4">Location</th>
@@ -111,21 +111,21 @@ export function AdminDashboardTabs({ users, properties, rentals }: AdminDashboar
                                         <th className="p-4 text-right">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 w-full flex flex-col space-y-4 md:table-row-group md:space-y-0 p-4 md:p-0">
                                     {safeProperties.map((property) => (
-                                        <tr key={property?.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
-                                            <td className="p-4 font-semibold text-slate-900 dark:text-white">
+                                        <tr key={property?.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors flex flex-col bg-white dark:bg-slate-900 border rounded-xl shadow-sm md:table-row md:border-0 md:shadow-none md:bg-transparent p-4 md:p-0">
+                                            <td className="p-2 md:p-4 font-semibold text-slate-900 dark:text-white block md:table-cell">
                                                 <Link href={`/properties/${property?.id}`} className="hover:underline text-blue-600 dark:text-blue-400">
                                                     {property?.title ?? "Property"}
                                                 </Link>
                                             </td>
-                                            <td className="p-4 text-xs">
+                                            <td className="p-2 md:p-4 text-xs block md:table-cell">
                                                 {property?.location ?? "N/A"}, {property?.city ?? ""}
                                             </td>
-                                            <td className="p-4 font-bold text-slate-900 dark:text-white">
+                                            <td className="p-2 md:p-4 font-bold text-slate-900 dark:text-white block md:table-cell">
                                                 ${property?.price?.toLocaleString() ?? "0"} / mo
                                             </td>
-                                            <td className="p-4">
+                                            <td className="p-2 md:p-4 block md:table-cell">
                                                 <Badge
                                                     className={`text-xs font-semibold px-2.5 py-1 ${
                                                         property?.status === "AVAILABLE"
@@ -136,7 +136,7 @@ export function AdminDashboardTabs({ users, properties, rentals }: AdminDashboar
                                                     {property?.status ?? "AVAILABLE"}
                                                 </Badge>
                                             </td>
-                                            <td className="p-4">
+                                            <td className="p-2 md:p-4 block md:table-cell">
                                                 <div className="font-semibold text-slate-900 dark:text-white">
                                                     {property?.landlord?.name ?? "Landlord"}
                                                 </div>
@@ -144,7 +144,7 @@ export function AdminDashboardTabs({ users, properties, rentals }: AdminDashboar
                                                     {property?.landlord?.email ?? ""}
                                                 </div>
                                             </td>
-                                            <td className="p-4 text-right">
+                                            <td className="p-2 md:p-4 text-right block md:table-cell">
                                                 {property?.id ? (
                                                     <Link href={`/properties/${property.id}`} target="_blank">
                                                         <Button size="xs" variant="outline" className="text-xs font-semibold gap-1 cursor-pointer">
@@ -182,8 +182,8 @@ export function AdminDashboardTabs({ users, properties, rentals }: AdminDashboar
                         </div>
                     ) : (
                         <div className="overflow-x-auto w-full">
-                            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400 min-w-[700px]">
-                                <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800">
+                            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400 block md:table">
+                                <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800 hidden md:table-header-group">
                                     <tr>
                                         <th className="p-4">Property Title</th>
                                         <th className="p-4">Tenant</th>
@@ -192,13 +192,13 @@ export function AdminDashboardTabs({ users, properties, rentals }: AdminDashboar
                                         <th className="p-4 text-right">Actions</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 w-full flex flex-col space-y-4 md:table-row-group md:space-y-0 p-4 md:p-0">
                                     {safeRentals.map((rental) => (
-                                        <tr key={rental?.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
-                                            <td className="p-4 font-semibold text-slate-900 dark:text-white">
+                                        <tr key={rental?.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors flex flex-col bg-white dark:bg-slate-900 border rounded-xl shadow-sm md:table-row md:border-0 md:shadow-none md:bg-transparent p-4 md:p-0">
+                                            <td className="p-2 md:p-4 font-semibold text-slate-900 dark:text-white block md:table-cell">
                                                 {rental?.property?.title ?? "Property Not Found"}
                                             </td>
-                                            <td className="p-4">
+                                            <td className="p-2 md:p-4 block md:table-cell">
                                                 <div className="font-semibold text-slate-900 dark:text-white">
                                                     {rental?.tenant?.name ?? "Tenant"}
                                                 </div>
@@ -206,7 +206,7 @@ export function AdminDashboardTabs({ users, properties, rentals }: AdminDashboar
                                                     {rental?.tenant?.email ?? ""}
                                                 </div>
                                             </td>
-                                            <td className="p-4">
+                                            <td className="p-2 md:p-4 block md:table-cell">
                                                 <Badge
                                                     className={`text-xs font-semibold px-2.5 py-1 ${
                                                         rental?.status === "APPROVED"
@@ -221,10 +221,10 @@ export function AdminDashboardTabs({ users, properties, rentals }: AdminDashboar
                                                     {rental?.status ?? "PENDING"}
                                                 </Badge>
                                             </td>
-                                            <td className="p-4 text-xs text-slate-400">
+                                            <td className="p-2 md:p-4 text-xs text-slate-400 block md:table-cell">
                                                 {rental?.createdAt ? new Date(rental.createdAt).toLocaleDateString() : "N/A"}
                                             </td>
-                                            <td className="p-4 text-right">
+                                            <td className="p-2 md:p-4 text-right block md:table-cell">
                                                 {rental?.property?.id ? (
                                                     <Link href={`/properties/${rental.property.id}`} target="_blank">
                                                         <Button size="xs" variant="outline" className="text-xs font-semibold gap-1 cursor-pointer">

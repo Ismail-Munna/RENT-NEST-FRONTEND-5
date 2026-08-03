@@ -54,9 +54,9 @@ export function AdminUserTable({ users }: AdminUserTableProps) {
     }
 
     return (
-        <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400">
-                <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800">
+        <div className="overflow-x-auto w-full block">
+            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400 block md:table">
+                <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800 hidden md:table-header-group">
                     <tr>
                         <th className="p-4">User</th>
                         <th className="p-4">Role</th>
@@ -65,16 +65,16 @@ export function AdminUserTable({ users }: AdminUserTableProps) {
                         <th className="p-4 text-right">Moderation Actions</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 w-full flex flex-col space-y-4 md:table-row-group md:space-y-0 p-4 md:p-0">
                     {safeUsers.map((user) => {
                         const isUpdating = updatingId === user.id;
                         return (
-                            <tr key={user.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
-                                <td className="p-4">
+                            <tr key={user.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors flex flex-col bg-white dark:bg-slate-900 border rounded-xl shadow-sm md:table-row md:border-0 md:shadow-none md:bg-transparent p-4 md:p-0">
+                                <td className="p-2 md:p-4 block md:table-cell">
                                     <div className="font-semibold text-slate-900 dark:text-white">{user.name}</div>
                                     <div className="text-xs text-slate-400">{user.email}</div>
                                 </td>
-                                <td className="p-4">
+                                <td className="p-2 md:p-4 block md:table-cell">
                                     <Badge
                                         variant="outline"
                                         className={`text-xs font-semibold ${
@@ -88,7 +88,7 @@ export function AdminUserTable({ users }: AdminUserTableProps) {
                                         {user.role}
                                     </Badge>
                                 </td>
-                                <td className="p-4">
+                                <td className="p-2 md:p-4 block md:table-cell">
                                     <Badge
                                         className={`text-xs font-semibold px-2.5 py-1 ${
                                             user.status === "ACTIVE"
@@ -99,10 +99,10 @@ export function AdminUserTable({ users }: AdminUserTableProps) {
                                         {user.status}
                                     </Badge>
                                 </td>
-                                <td className="p-4 text-xs text-slate-400">
+                                <td className="p-2 md:p-4 text-xs text-slate-400 block md:table-cell">
                                     {new Date(user.createdAt).toLocaleDateString()}
                                 </td>
-                                <td className="p-4 text-right">
+                                <td className="p-2 md:p-4 text-right block md:table-cell">
                                     {user.role !== "ADMIN" && (
                                         <Button
                                             size="xs"

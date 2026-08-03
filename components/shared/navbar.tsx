@@ -54,13 +54,13 @@ export function Navbar({ user }: NavbarProps) {
     };
 
     return (
-        <nav className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-16">
+        <nav className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md w-full max-w-full">
+            <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16 gap-2">
                     {/* Brand Logo */}
-                    <Link href="/" className="flex items-center gap-2 font-bold text-xl text-slate-900 dark:text-white">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-white shadow-md">
-                            <Building className="h-5 w-5" />
+                    <Link href="/" className="flex items-center gap-1.5 sm:gap-2 font-bold text-xl sm:text-2xl text-slate-900 dark:text-white shrink-0">
+                        <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-lg bg-blue-600 text-white shadow-md shrink-0">
+                            <Building className="h-5 w-5 sm:h-6 sm:w-6" />
                         </div>
                         <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                             RentNest
@@ -85,14 +85,14 @@ export function Navbar({ user }: NavbarProps) {
                     </div>
 
                     {/* User Auth Section & Theme Toggle */}
-                    <div className="flex items-center gap-2 md:gap-4">
+                    <div className="flex items-center gap-1.5 sm:gap-4 shrink-0">
                         <ThemeToggle />
                         
                         {user?.success && userInfo ? (
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <button className="flex items-center gap-2 p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus:outline-none cursor-pointer">
-                                    <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-semibold text-sm shadow">
+                                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-semibold text-xs sm:text-sm shadow">
                                         {userName?.[0]?.toUpperCase() ?? "U"}
                                     </div>
                                 </button>
@@ -126,14 +126,14 @@ export function Navbar({ user }: NavbarProps) {
                             </DropdownMenuContent>
                         </DropdownMenu>
                     ) : (
-                        <div className="flex items-center gap-3">
+                        <div className="flex items-center gap-1.5 sm:gap-3">
                             <Link href="/login">
-                                <Button variant="ghost" size="sm" className="font-medium cursor-pointer">
+                                <Button variant="ghost" size="sm" className="font-medium cursor-pointer text-xs sm:text-sm px-2 sm:px-3 h-8 sm:h-9">
                                     Log In
                                 </Button>
                             </Link>
                             <Link href="/register">
-                                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white font-medium shadow cursor-pointer">
+                                <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white font-medium shadow cursor-pointer text-xs sm:text-sm px-2.5 sm:px-4 h-8 sm:h-9">
                                     Get Started
                                 </Button>
                             </Link>

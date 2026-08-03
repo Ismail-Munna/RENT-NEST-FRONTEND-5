@@ -56,65 +56,65 @@ export default async function TenantDashboardPage() {
     const rejectedRequests = requests.filter((r) => r.status === "REJECTED").length;
 
     return (
-        <div className="p-6 md:p-8 space-y-8 bg-slate-50 dark:bg-slate-950 min-h-screen">
-            <div>
-                <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Tenant Dashboard</h1>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
+        <div className="w-full min-w-0 flex-1 px-4 sm:px-6 lg:px-8 py-6 space-y-6 sm:space-y-8 bg-slate-50 dark:bg-slate-950 block">
+            <div className="w-full mb-2 sm:mb-4">
+                <h1 className="text-xl sm:text-2xl font-bold break-words text-slate-900 dark:text-white">Tenant Dashboard</h1>
+                <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 break-words">
                     Track your rental applications, landlord responses, and payment checkout statuses.
                 </p>
             </div>
 
             {/* Overview Stats */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full min-w-0">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-3 w-full min-w-0">
                     <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400">
                         <FileText className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">Total Requests</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">Total Requests</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{totalRequests}</h3>
                     </div>
                 </Card>
 
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-3 w-full min-w-0">
                     <div className="p-3 rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400">
                         <Clock className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">Pending Review</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">Pending Review</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{pendingRequests}</h3>
                     </div>
                 </Card>
 
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-3 w-full min-w-0">
                     <div className="p-3 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
                         <CheckCircle2 className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">Approved Requests</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">Approved Requests</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{approvedRequests}</h3>
                     </div>
                 </Card>
 
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-3 w-full min-w-0">
                     <div className="p-3 rounded-xl bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400">
                         <XCircle className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">Rejected</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">Rejected</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{rejectedRequests}</h3>
                     </div>
                 </Card>
             </div>
 
             {/* Rental Request History Table */}
-            <Card className="border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
-                <div className="p-5 border-b border-slate-100 dark:border-slate-800">
-                    <h2 className="font-bold text-lg text-slate-900 dark:text-white">Rental Request History</h2>
+            <Card className="border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm w-full min-w-0">
+                <div className="p-4 sm:p-5 border-b border-slate-100 dark:border-slate-800">
+                    <h2 className="font-bold text-base sm:text-lg text-slate-900 dark:text-white">Rental Request History</h2>
                 </div>
 
                 {!Array.isArray(requests) || requests.length === 0 ? (
-                    <div className="p-12 text-center text-slate-500">
+                    <div className="p-8 sm:p-12 text-center text-slate-500">
                         <Building className="h-10 w-10 mx-auto mb-2 text-slate-400" />
                         <p className="font-medium text-sm">You haven't submitted any rental requests yet.</p>
                         <Link href="/properties" className="text-blue-600 font-semibold text-xs hover:underline mt-2 inline-block">
@@ -122,9 +122,9 @@ export default async function TenantDashboardPage() {
                         </Link>
                     </div>
                 ) : (
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400">
-                            <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800">
+                    <div className="overflow-x-auto w-full min-w-0">
+                        <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400 block sm:table">
+                            <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800 hidden sm:table-header-group">
                                 <tr>
                                     <th className="p-4">Property</th>
                                     <th className="p-4">Monthly Rent</th>
@@ -134,26 +134,28 @@ export default async function TenantDashboardPage() {
                                     <th className="p-4 text-right">Action / Payment</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                            <tbody className="divide-y-0 sm:divide-y divide-slate-100 dark:divide-slate-800 w-full flex flex-col space-y-4 sm:table-row-group sm:space-y-0 p-3 sm:p-0">
                                 {requests.map((req) => {
                                     const requestId = req?.id || (req as any)?._id;
                                     return (
-                                        <tr key={requestId || Math.random()} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
-                                            <td className="p-4">
-                                                <div className="font-semibold text-slate-900 dark:text-white">
+                                        <tr key={requestId || Math.random()} className="block sm:table-row border mb-3 sm:mb-0 hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors bg-white dark:bg-slate-900 rounded-xl shadow-sm sm:border-0 sm:shadow-none sm:bg-transparent p-4 sm:p-0 space-y-2 sm:space-y-0">
+                                            <td className="block sm:table-cell w-full sm:w-auto text-left p-1 sm:p-4 min-w-0 max-w-full break-words">
+                                                <div className="font-semibold text-slate-900 dark:text-white break-words">
                                                     {req.property?.title || "Property Listing"}
                                                 </div>
-                                                <div className="text-xs text-slate-400">
+                                                <div className="text-xs text-slate-400 break-words">
                                                     {req.property?.location}, {req.property?.city}
                                                 </div>
                                             </td>
-                                            <td className="p-4 font-bold text-slate-900 dark:text-white">
+                                            <td className="block sm:table-cell w-full sm:w-auto text-left p-1 sm:p-4 font-bold text-slate-900 dark:text-white min-w-0 max-w-full">
+                                                <span className="sm:hidden text-xs font-medium text-slate-400 mr-1">Rent: </span>
                                                 ${req.property?.price?.toLocaleString() || "0"} / mo
                                             </td>
-                                            <td className="p-4 text-xs max-w-xs truncate">
+                                            <td className="block sm:table-cell w-full sm:w-auto text-left p-1 sm:p-4 text-xs max-w-xs truncate min-w-0">
+                                                <span className="sm:hidden font-medium text-slate-400 mr-1">Note: </span>
                                                 {req.message || "No message provided."}
                                             </td>
-                                            <td className="p-4">
+                                            <td className="block sm:table-cell w-full sm:w-auto text-left p-1 sm:p-4 min-w-0">
                                                 <Badge
                                                     className={`text-xs font-semibold px-2.5 py-1 ${
                                                         req.status === "APPROVED"
@@ -168,17 +170,20 @@ export default async function TenantDashboardPage() {
                                                     {req.status}
                                                 </Badge>
                                             </td>
-                                            <td className="p-4 text-xs text-slate-400">
+                                            <td className="block sm:table-cell w-full sm:w-auto text-left p-1 sm:p-4 text-xs text-slate-400 min-w-0">
+                                                <span className="sm:hidden font-medium text-slate-400 mr-1">Date: </span>
                                                 {new Date(req.createdAt).toLocaleDateString()}
                                             </td>
-                                            <td className="p-4 text-right">
+                                            <td className="block sm:table-cell w-full sm:w-auto text-left sm:text-right p-1 sm:p-4 min-w-0 max-w-full">
                                                 {req.status === "APPROVED" ? (
-                                                    <TenantCheckoutButton
-                                                        rentalRequestId={requestId}
-                                                        amount={req.property?.price || 500}
-                                                    />
+                                                    <div className="flex flex-wrap items-center justify-start sm:justify-end gap-2">
+                                                        <TenantCheckoutButton
+                                                            rentalRequestId={requestId}
+                                                            amount={req.property?.price || 500}
+                                                        />
+                                                    </div>
                                                 ) : req.status === "ACTIVE" ? (
-                                                    <div className="flex justify-end items-center gap-2">
+                                                    <div className="flex flex-wrap justify-start sm:justify-end items-center gap-2">
                                                         <Badge className="bg-emerald-600 text-white font-semibold text-xs py-1 px-2.5">
                                                             Active
                                                         </Badge>

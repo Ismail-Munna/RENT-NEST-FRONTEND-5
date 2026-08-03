@@ -74,8 +74,8 @@ export function LandlordRequestTable({ initialRequests }: LandlordRequestTablePr
 
     return (
         <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400">
-                <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800">
+            <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400 block md:table">
+                <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800 hidden md:table-header-group">
                     <tr>
                         <th className="p-4">Property</th>
                         <th className="p-4">Tenant</th>
@@ -85,28 +85,28 @@ export function LandlordRequestTable({ initialRequests }: LandlordRequestTablePr
                         <th className="p-4 text-right">Optimistic Actions</th>
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-800 w-full flex flex-col space-y-4 md:table-row-group md:space-y-0 p-4 md:p-0">
                     {requestsList.map((req) => {
                         const isThisUpdating = updatingId === req.id;
                         return (
-                            <tr key={req.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
-                                <td className="p-4 font-semibold text-slate-900 dark:text-white">
+                            <tr key={req.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors flex flex-col bg-white dark:bg-slate-900 border rounded-xl shadow-sm md:table-row md:border-0 md:shadow-none md:bg-transparent p-4 md:p-0">
+                                <td className="p-2 md:p-4 font-semibold text-slate-900 dark:text-white block md:table-cell">
                                     {req.property?.title || "Property"}
                                     <div className="text-xs font-normal text-slate-400">
                                         ${req.property?.price?.toLocaleString()}/mo • {req.property?.city}
                                     </div>
                                 </td>
-                                <td className="p-4">
+                                <td className="p-2 md:p-4 block md:table-cell">
                                     <div className="font-medium text-slate-900 dark:text-white flex items-center gap-1.5">
                                         <UserCheck className="h-3.5 w-3.5 text-blue-600" />
                                         {req.tenant?.name || "Tenant"}
                                     </div>
                                     <div className="text-xs text-slate-400">{req.tenant?.email}</div>
                                 </td>
-                                <td className="p-4 text-xs max-w-xs truncate">
+                                <td className="p-2 md:p-4 text-xs max-w-xs truncate block md:table-cell">
                                     {req.message || "No custom message provided."}
                                 </td>
-                                <td className="p-4">
+                                <td className="p-2 md:p-4 block md:table-cell">
                                     <Badge
                                         className={`text-xs font-semibold px-2.5 py-1 ${
                                             req.status === "APPROVED"
@@ -121,10 +121,10 @@ export function LandlordRequestTable({ initialRequests }: LandlordRequestTablePr
                                         {req.status}
                                     </Badge>
                                 </td>
-                                <td className="p-4 text-xs text-slate-400">
+                                <td className="p-2 md:p-4 text-xs text-slate-400 block md:table-cell">
                                     {new Date(req.createdAt).toLocaleDateString()}
                                 </td>
-                                <td className="p-4 text-right space-x-2">
+                                <td className="p-2 md:p-4 text-right space-x-2 block md:table-cell">
                                     {req.status === "PENDING" ? (
                                         <div className="inline-flex gap-2">
                                             <Button

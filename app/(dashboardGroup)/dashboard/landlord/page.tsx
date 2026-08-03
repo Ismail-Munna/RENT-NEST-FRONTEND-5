@@ -69,11 +69,11 @@ export default async function LandlordDashboardPage() {
     const estimatedMonthlyIncome = properties.reduce((acc, curr) => acc + (curr?.price || 0), 0);
 
     return (
-        <div className="p-6 md:p-8 space-y-8 bg-slate-50 dark:bg-slate-950 min-h-screen">
+        <div className="p-4 sm:p-6 md:p-8 space-y-8 bg-slate-50 dark:bg-slate-950 w-full max-w-full min-h-0 overflow-x-hidden">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <div>
-                    <h1 className="text-2xl font-bold text-slate-900 dark:text-white">Landlord Dashboard</h1>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                <div className="w-full">
+                    <h1 className="text-xl sm:text-2xl md:text-3xl font-bold break-words px-4 sm:px-6 text-slate-900 dark:text-white">Landlord Dashboard</h1>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 px-4 sm:px-6 break-words">
                         Manage your property listings, review incoming rental applications, and track earnings.
                     </p>
                 </div>
@@ -82,42 +82,42 @@ export default async function LandlordDashboardPage() {
 
             {/* Overview Earnings & Stats */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-4">
                     <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400">
                         <Building className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">My Properties</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">My Properties</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{totalProperties}</h3>
                     </div>
                 </Card>
 
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-4">
                     <div className="p-3 rounded-xl bg-indigo-100 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
                         <FileText className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">Total Applications</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">Total Applications</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{totalRequests}</h3>
                     </div>
                 </Card>
 
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-4">
                     <div className="p-3 rounded-xl bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400">
                         <Inbox className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">Pending Review</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">Pending Review</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">{pendingRequests}</h3>
                     </div>
                 </Card>
 
-                <Card className="p-5 border-slate-200 dark:border-slate-800 flex items-center gap-4">
+                <Card className="flex flex-col items-center justify-center text-center p-4 border-slate-200 dark:border-slate-800 gap-4">
                     <div className="p-3 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400">
                         <DollarSign className="h-6 w-6" />
                     </div>
                     <div>
-                        <span className="text-xs text-slate-500 font-medium">Est. Monthly Value</span>
+                        <span className="text-xs text-slate-500 font-medium break-words">Est. Monthly Value</span>
                         <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
                             ${estimatedMonthlyIncome.toLocaleString()}
                         </h3>
@@ -155,8 +155,8 @@ export default async function LandlordDashboardPage() {
                     </div>
                 ) : (
                     <div className="overflow-x-auto">
-                        <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400">
-                            <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800">
+                        <table className="w-full text-left text-sm text-slate-600 dark:text-slate-400 block md:table">
+                            <thead className="bg-slate-50 dark:bg-slate-900 text-xs font-semibold uppercase text-slate-500 border-b border-slate-100 dark:border-slate-800 hidden md:table-header-group">
                                 <tr>
                                     <th className="p-4">Title</th>
                                     <th className="p-4">Location</th>
@@ -166,26 +166,26 @@ export default async function LandlordDashboardPage() {
                                     <th className="p-4 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                            <tbody className="divide-y divide-slate-100 dark:divide-slate-800 w-full flex flex-col space-y-4 md:table-row-group md:space-y-0 p-4 md:p-0">
                                 {properties.map((property) => {
                                     const propId = property?.id || (property as any)?._id;
                                     return (
-                                        <tr key={propId || Math.random()} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors">
-                                            <td className="p-4 font-semibold text-slate-900 dark:text-white">
+                                        <tr key={propId || Math.random()} className="hover:bg-slate-50/50 dark:hover:bg-slate-900/50 transition-colors flex flex-col bg-white dark:bg-slate-900 border rounded-xl shadow-sm md:table-row md:border-0 md:shadow-none md:bg-transparent p-4 md:p-0">
+                                            <td className="p-2 md:p-4 font-semibold text-slate-900 dark:text-white block md:table-cell">
                                                 <Link href={`/properties/${propId}`} className="hover:underline text-blue-600 dark:text-blue-400">
                                                     {property?.title ?? "Property Listing"}
                                                 </Link>
                                             </td>
-                                            <td className="p-4 text-xs">
+                                            <td className="p-2 md:p-4 text-xs block md:table-cell">
                                                 {property?.location ?? "Location"}, {property?.city ?? "City"}
                                             </td>
-                                            <td className="p-4 font-bold text-slate-900 dark:text-white">
+                                            <td className="p-2 md:p-4 font-bold text-slate-900 dark:text-white block md:table-cell">
                                                 ${property?.price?.toLocaleString() || "0"} / mo
                                             </td>
-                                            <td className="p-4 text-xs">
+                                            <td className="p-2 md:p-4 text-xs block md:table-cell">
                                                 {property?.bedrooms ?? 0} bed • {property?.bathrooms ?? 0} bath • {property?.areaSqft ?? 0} sqft
                                             </td>
-                                            <td className="p-4">
+                                            <td className="p-2 md:p-4 block md:table-cell">
                                                 <Badge
                                                     className={`text-xs font-semibold px-2.5 py-1 ${
                                                         property?.status === "AVAILABLE"
@@ -196,7 +196,7 @@ export default async function LandlordDashboardPage() {
                                                     {property?.status ?? "AVAILABLE"}
                                                 </Badge>
                                             </td>
-                                            <td className="p-4 text-right">
+                                            <td className="p-2 md:p-4 text-right block md:table-cell">
                                                 <LandlordPropertyActions propertyId={propId} property={property} />
                                             </td>
                                         </tr>
